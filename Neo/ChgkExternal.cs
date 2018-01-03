@@ -33,6 +33,12 @@ namespace EasyChGK.Neo
             }
             return s;
         }
+
+        // Get image URL
+        public static String GetPictureURL(String pic_fn)
+        {
+            return IMAGE_URL + pic_fn;
+        }
     }
 
 

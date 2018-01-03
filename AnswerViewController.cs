@@ -8,7 +8,7 @@ namespace EasyChGK
     {
         private String _answer = "";
         private String _comment = "";
-        public QuestionViewController _qvc = null;
+        public QuestionViewController _qvc;
 
         public AnswerViewController (IntPtr handle) : base (handle)
         {
@@ -27,26 +27,26 @@ namespace EasyChGK
             // Perform any additional setup after loading the view, typically from a nib.
             // Clear view text boxes
             GuessedButton.TouchUpInside += (object sender, EventArgs e) => {
-                endAnswer(true);
+                EndAnswer(true);
             };
 
             NotGuessedButton.TouchUpInside += (object sender, EventArgs e) => {
-                endAnswer(false);
+                EndAnswer(false);
             };
         }
 
-        private void endAnswer(bool isCorrect)
+        private void EndAnswer(bool isCorrect)
         {
             CompleteAnswer(isCorrect);
             if (_qvc != null)
             {
-                _qvc.UpdateLabels();
+                _qvc.UpdateUI();
             }
 
             this.NavigationController.PopViewController(true);
         }
 
-        public void setQVC(QuestionViewController qvc)
+        public void SetQVC(QuestionViewController qvc)
         {
             _qvc = qvc;
         }

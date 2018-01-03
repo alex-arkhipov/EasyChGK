@@ -24,4 +24,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="512x512bb.png" width="512" height="512"/>
+    </resources>
 </document>

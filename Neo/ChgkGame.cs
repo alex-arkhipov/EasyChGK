@@ -13,6 +13,7 @@ namespace EasyChGK.Neo
         private int _round;
         private int _score;
         private int _num_of_questions;
+        private bool _show_tips;
 
         private LinkedList<ChgkQuestion> questions;
         private LinkedListNode<ChgkQuestion> currentQuestionNode;
@@ -20,12 +21,23 @@ namespace EasyChGK.Neo
         private ChgkGame()
         {
             _num_of_questions = DEFAULT_NUM_OF_QUESTIONS;
+            _show_tips = false;
             ResetGame();
         }
 
         public int GetRound()
         {
             return _round;
+        }
+
+        public bool GetShowTips()
+        {
+            return _show_tips;
+        }
+
+        public void SetShowTips(bool s)
+        {
+            _show_tips = s;
         }
 
         public int GetNumOfQuestions()

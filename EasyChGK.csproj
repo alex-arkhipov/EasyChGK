@@ -143,5 +143,9 @@
       <DependentUpon>SettingsViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\512x512bb.png" />
+    <BundleResource Include="Resources\pic70x70.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

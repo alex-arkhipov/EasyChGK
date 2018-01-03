@@ -18,14 +18,27 @@ namespace EasyChGK
 
             Console.WriteLine("View Did Load of QuestionViewController called");
 
-            NextRound(true);
-            UpdateLabels();
             AnswerButton.Enabled = true;
+            PictureButton.Hidden = false;
+
+            NextRound(true);
+            UpdateUI();
 
             AnswerButton.TouchUpInside += (object sender, EventArgs e) => {
                 GoToAnswerView();
                 Answer(); // Next Round
             };
+
+            PictureButton.TouchUpInside += (object sender, EventArgs e) => {
+                ShowPicture();
+            };
+        }
+
+        private void ShowPicture()
+        {
+            // TODO: open new view to implement picture
+            Console.WriteLine("Picture must be shown here");
+
         }
 
         private void GoToAnswerView()
@@ -37,7 +50,7 @@ namespace EasyChGK
                 Console.WriteLine("QuestionView: GoToAnswerView called 2");
                 var game = Neo.ChgkGame.GetGame();
                 answerViewContoller.ShowAnswer(game.GetCurrentAnswer(), game.GetCurrentComment());
-                answerViewContoller.setQVC(this); // set callback (TODO: make it delegate later)
+                answerViewContoller.SetQVC(this); // set callback (TODO: make it delegate later)
                 this.NavigationController.PushViewController(answerViewContoller, true);
             }
         }
@@ -97,7 +110,7 @@ namespace EasyChGK
 
             if (!isFirst) game.NextRound();
 
-            UpdateLabels();
+            UpdateUI();
 
             // Show question
             ShowQuestion(game.GetCurrentQuestion());
@@ -123,7 +136,21 @@ namespace EasyChGK
             // Release any cached data, images, etc that aren't in use.
         }
 
-        public void UpdateLabels()
+        public void UpdateUI()
+        {
+            UpdateLabels();
+            UpdatePicture();
+        }
+
+        private void UpdatePicture()
+        {
+            var game = Neo.ChgkGame.GetGame();
+            var q = game.GetCurrentAll();
+
+            PictureButton.Hidden = q.IsImage() ? false : true;
+        }
+
+        private void UpdateLabels()
         {
             var game = Neo.ChgkGame.GetGame();
             RoundLabel.Text = game.GetRound().ToString();

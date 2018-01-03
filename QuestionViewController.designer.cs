@@ -20,6 +20,10 @@ namespace EasyChGK
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton PictureButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel QuestionLable { get; set; }
 
         [Outlet]
@@ -39,6 +43,11 @@ namespace EasyChGK
             if (AnswerButton != null) {
                 AnswerButton.Dispose ();
                 AnswerButton = null;
+            }
+
+            if (PictureButton != null) {
+                PictureButton.Dispose ();
+                PictureButton = null;
             }
 
             if (QuestionLable != null) {

@@ -26,6 +26,14 @@ namespace EasyChGK
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton SaveButton { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel ShowTipsLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UISwitch ShowTipsSwitch { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (questionQuantityLable != null) {
@@ -41,6 +49,16 @@ namespace EasyChGK
             if (SaveButton != null) {
                 SaveButton.Dispose ();
                 SaveButton = null;
+            }
+
+            if (ShowTipsLabel != null) {
+                ShowTipsLabel.Dispose ();
+                ShowTipsLabel = null;
+            }
+
+            if (ShowTipsSwitch != null) {
+                ShowTipsSwitch.Dispose ();
+                ShowTipsSwitch = null;
             }
         }
     }
