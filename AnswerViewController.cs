@@ -28,11 +28,19 @@ namespace EasyChGK
             // Clear view text boxes
             GuessedButton.TouchUpInside += (object sender, EventArgs e) => {
                 EndAnswer(true);
+                GoToQuestionView();
             };
 
             NotGuessedButton.TouchUpInside += (object sender, EventArgs e) => {
                 EndAnswer(false);
+                GoToQuestionView();
             };
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            EndAnswer(false);
         }
 
         private void EndAnswer(bool isCorrect)
@@ -40,9 +48,13 @@ namespace EasyChGK
             CompleteAnswer(isCorrect);
             if (_qvc != null)
             {
+                _qvc.NextRound();
                 _qvc.UpdateUI();
             }
+        }
 
+        private void GoToQuestionView()
+        {
             this.NavigationController.PopViewController(true);
         }
 

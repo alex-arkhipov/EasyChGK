@@ -26,7 +26,6 @@ namespace EasyChGK
 
             AnswerButton.TouchUpInside += (object sender, EventArgs e) => {
                 GoToAnswerView();
-                Answer(); // Next Round
             };
 
             PictureButton.TouchUpInside += (object sender, EventArgs e) => {
@@ -55,46 +54,7 @@ namespace EasyChGK
             }
         }
 
-        private void Answer()
-        {
-            Console.WriteLine("Answer of QuestionViewController called");
-
-            //var game = Neo.ChgkGame.GetGame();
-
-            // Show comments text view if available
-            //ShowComment(game.GetCurrentComment());
-
-            // Ask for guess/not guess
-            ShowAndCheckAnswer();
-
-            // NextRound() will be called from inside ShowAndCheckAnswer()
-            // NextRound();
-        }
-
-        private void ShowAndCheckAnswer()
-        {
-            var game = Neo.ChgkGame.GetGame();
-
-            /*
-            //Create Alert
-            var AlertController = UIAlertController.Create("Correct answer", game.GetCurrentAnswer(), UIAlertControllerStyle.Alert);
-
-            //Add Actions
-            AlertController.AddAction(UIAlertAction.Create("Guessed", UIAlertActionStyle.Default, alert => CompleteAnswer()));
-            AlertController.AddAction(UIAlertAction.Create("Not guessed", UIAlertActionStyle.Default, alert => CompleteAnswer()));
-
-            //Present Alert
-            PresentViewController(AlertController, true, null);
-            */
-            CompleteAnswer();
-        }
-
-        private void CompleteAnswer()
-        {
-            NextRound();
-        }
-
-        private void NextRound(bool isFirst = false)
+        public void NextRound(bool isFirst = false)
         {
             // Game next round - check if not the end
             var game = Neo.ChgkGame.GetGame();
