@@ -12,15 +12,46 @@ namespace EasyChGK.Neo
         bool _isImage;
         String _picture;
 
+        bool _isTip;
+        String _tip;
+
         public ChgkQuestion(String question, String answer, String comment = null)
         {
             _question = question;
             _answer = answer;
             _comment = comment;
+            _isTip = false;
+            _tip = "";
             _isImage = false;
             _picture = "";
             parseImage();
+            parseTip();
+        }
 
+        private void parseTip()
+        {
+            string pattern = @"^(\[.+\])";
+            Regex regex = new Regex(pattern);
+
+            Match match = regex.Match(_question);
+
+            if (match.Success)
+            {
+                _isTip = true;
+                _tip = match.Groups[1].Value;
+                removeTip();
+            }
+        }
+
+        private void removeTip()
+        {
+            string pattern = @"^(\[.+\]\s*)";
+            _question = Regex.Replace(_question, pattern, "");
+        }
+
+        public bool IsTip()
+        {
+            return _isTip;
         }
 
         private void parseImage()
@@ -69,6 +100,11 @@ namespace EasyChGK.Neo
         public String GetQuestion()
         {
             return _question;
+        }
+
+        public String GetQuestionAndTip()
+        {
+            return _tip+_question;
         }
 
         public String GetAnswer()

@@ -21,7 +21,7 @@ namespace EasyChGK.Neo
         private ChgkGame()
         {
             _num_of_questions = DEFAULT_NUM_OF_QUESTIONS;
-            _show_tips = false;
+            _show_tips = true;
             ResetGame();
         }
 
@@ -171,14 +171,10 @@ namespace EasyChGK.Neo
                 String a = node["Answer"].InnerText;
                 String c = node["Comments"].InnerText;
 
-                if (q.StartsWith("(pic:", StringComparison.InvariantCulture))
-                {
-                    // TODO: Extract picture from question
-                    Console.WriteLine("Picture found:" + q);
-                }
-
                 var question = new ChgkQuestion(q, a, c);
                 questions.AddLast(question);
+
+                Console.WriteLine(i.ToString()+") Question: " + q);
                 i++;
             }
         }
