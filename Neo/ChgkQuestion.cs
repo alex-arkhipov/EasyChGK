@@ -10,7 +10,7 @@ namespace EasyChGK.Neo
         String _comment;
 
         bool _isImage;
-        String _picture;
+        String _image;
 
         bool _isTip;
         String _tip;
@@ -23,7 +23,7 @@ namespace EasyChGK.Neo
             _isTip = false;
             _tip = "";
             _isImage = false;
-            _picture = "";
+            _image = "";
             parseImage();
             parseTip();
         }
@@ -69,7 +69,7 @@ namespace EasyChGK.Neo
                 if (match.Success)
                 {
                     // Found picture
-                    _picture = match.Groups[1].Value;
+                    _image = match.Groups[1].Value;
                     _isImage = true;
                 }
                 else
@@ -115,6 +115,11 @@ namespace EasyChGK.Neo
         public String GetComment()
         {
             return _comment;
+        }
+
+        public String GetImageURL()
+        {
+            return ChgkExternal.GetPictureURL(_image);
         }
 
     }

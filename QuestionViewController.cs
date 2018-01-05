@@ -29,15 +29,21 @@ namespace EasyChGK
             };
 
             PictureButton.TouchUpInside += (object sender, EventArgs e) => {
-                ShowPicture();
+                GoToImageView();
             };
         }
 
-        private void ShowPicture()
+        private void GoToImageView()
         {
-            // TODO: open new view to implement picture
-            Console.WriteLine("Picture must be shown here");
-
+            Console.WriteLine("QuestionView: GoToImageView called 1");
+            var imageViewContoller = this.Storyboard.InstantiateViewController("ImageViewController") as ImageViewController;
+            if (imageViewContoller != null)
+            {
+                Console.WriteLine("QuestionView: GoToImageView called 2");
+                var game = Neo.ChgkGame.GetGame();
+                imageViewContoller.SetImageUrl(game.GetCurrentAll().GetImageURL()); // set callback (TODO: make it delegate later)
+                this.NavigationController.PushViewController(imageViewContoller, true);
+            }
         }
 
         private void GoToAnswerView()

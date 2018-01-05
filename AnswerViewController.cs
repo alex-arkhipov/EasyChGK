@@ -27,7 +27,6 @@ namespace EasyChGK
             // Perform any additional setup after loading the view, typically from a nib.
             // Clear view text boxes
             GuessedButton.TouchUpInside += (object sender, EventArgs e) => {
-                EndAnswer(true);
                 GoToQuestionView();
             };
 

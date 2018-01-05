@@ -361,6 +361,38 @@
             </objects>
             <point key="canvasLocation" x="-435" y="-39"/>
         </scene>
+        <scene sceneID="8184">
+            <objects>
+                <viewController id="8185" sceneMemberID="viewController" customClass="ImageViewController" storyboardIdentifier="ImageViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8182"/>
+                        <viewControllerLayoutGuide type="bottom" id="8183"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8186">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="8189" translatesAutoresizingMaskIntoConstraints="NO" scalesPageToFit="YES">
+                                <rect key="frame" x="40" y="50" width="240" height="487"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="8190" firstItem="8189" firstAttribute="top" secondItem="8182" secondAttribute="bottom" constant="30"/>
+                            <constraint id="8191" firstItem="8189" firstAttribute="leading" secondItem="8186" secondAttribute="leadingMargin" constant="24"/>
+                            <constraint id="8194" firstItem="8186" firstAttribute="trailingMargin" secondItem="8189" secondAttribute="trailing" constant="24"/>
+                            <constraint id="8195" firstItem="8183" firstAttribute="top" secondItem="8189" secondAttribute="bottom" constant="31"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="WebView" destination="8189" id="name-outlet-8189"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8187" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-94" y="-41"/>
+        </scene>
     </scenes>
     <resources>
         <image name="512x512bb.png" width="512" height="512"/>

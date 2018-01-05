@@ -142,6 +142,10 @@
     <Compile Include="SettingsViewController.designer.cs">
       <DependentUpon>SettingsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageViewController.cs" />
+    <Compile Include="ImageViewController.designer.cs">
+      <DependentUpon>ImageViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\512x512bb.png" />
