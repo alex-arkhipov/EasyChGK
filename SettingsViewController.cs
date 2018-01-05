@@ -6,8 +6,6 @@ namespace EasyChGK
 {
     public partial class SettingsViewController : UITableViewController
     {
-        const string KEY_QUESTION_QUANTITY = "qq";
-        const string KEY_SHOW_TIPS = "tips";
 
         protected SettingsViewController(IntPtr handle) : base(handle)
         {
@@ -17,9 +15,6 @@ namespace EasyChGK
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            LoadPreferences();
-            SaveSettings();
 
             var game = Neo.ChgkGame.GetGame();
 
@@ -31,8 +26,6 @@ namespace EasyChGK
             SaveButton.TouchUpInside += (object sender, EventArgs e) => {
                 Console.WriteLine("SettingsViewController: SaveButton pushed");
 
-                SaveSettings();
-                SavePreferences();
                 this.NavigationController.PopViewController(true);
             };
         }
@@ -41,40 +34,6 @@ namespace EasyChGK
         {
             base.ViewDidDisappear(animated);
             SaveSettings();
-            SavePreferences();
-        }
-
-        // Save preferences in application preferences
-        private void SavePreferences()
-        {
-            using(var ns = NSUserDefaults.StandardUserDefaults)
-            {
-                // Question Quantity
-                int n = GetQuestionQuantity();
-                if (n!= 0)
-                {
-                    ns.SetInt(n, KEY_QUESTION_QUANTITY);
-                }
-
-                // Show tips
-                ns.SetBool(ShowTipsSwitch.On, KEY_SHOW_TIPS);
-            }
-        }
-
-        private void LoadPreferences()
-        {
-            using (var ns = NSUserDefaults.StandardUserDefaults)
-            {
-                // Question quantity
-                int n = (int)(ns.IntForKey(KEY_QUESTION_QUANTITY));
-                if (n != 0)
-                {
-                    questionQuantityText.Text = n.ToString();
-                }
-
-                // Show tips
-                ShowTipsSwitch.On = ns.BoolForKey(KEY_SHOW_TIPS);
-            }
         }
 
         private int GetQuestionQuantity()
@@ -96,6 +55,7 @@ namespace EasyChGK
         // Save settings in Game object
         private void SaveSettings()
         {
+            Console.WriteLine("SettingsViewController: Saving settings in Game object");
             var game = Neo.ChgkGame.GetGame();
 
             // Quation quantity
@@ -108,6 +68,8 @@ namespace EasyChGK
             // Show tips
             bool s = ShowTipsSwitch.On;
             game.SetShowTips(s);
+
+            game.SavePreferences();
 
         }
 

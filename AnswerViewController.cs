@@ -32,7 +32,6 @@ namespace EasyChGK
             };
 
             NotGuessedButton.TouchUpInside += (object sender, EventArgs e) => {
-                EndAnswer(false);
                 GoToQuestionView();
             };
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using Foundation;
 
 namespace EasyChGK.Neo
 {
@@ -8,6 +9,10 @@ namespace EasyChGK.Neo
     {
         const int DEFAULT_NUM_OF_QUESTIONS = 6;
         const int MAX_NUM_OF_QUESTIONS = 100;
+
+        // Keys to save preferences
+        const string KEY_QUESTION_QUANTITY = "qq";
+        const string KEY_SHOW_TIPS = "tips";
 
         private static ChgkGame _chgkGame;
         private int _round;
@@ -22,6 +27,7 @@ namespace EasyChGK.Neo
         {
             _num_of_questions = DEFAULT_NUM_OF_QUESTIONS;
             _show_tips = true;
+            LoadPreferences();
             ResetGame();
         }
 
@@ -176,6 +182,44 @@ namespace EasyChGK.Neo
 
                 Console.WriteLine(i.ToString()+") Question: " + q);
                 i++;
+            }
+        }
+
+        // Save preferences in application preferences
+        public void SavePreferences()
+        {
+            using (var ns = NSUserDefaults.StandardUserDefaults)
+            {
+                Console.WriteLine("ChgkGame: Saving preferences");
+                // Question Quantity
+                int n = _num_of_questions;
+                ns.SetInt(n, KEY_QUESTION_QUANTITY);
+                Console.WriteLine("ChgkGame: Question quantity to save = " + n.ToString());
+
+                // Show tips
+                ns.SetBool(_show_tips, KEY_SHOW_TIPS);
+                Console.WriteLine("ChgkGame: Show tips to save = " + _show_tips.ToString());
+            }
+        }
+
+        private void LoadPreferences()
+        {
+            Console.WriteLine("ChgkGame: Loading preferences");
+            using (var ns = NSUserDefaults.StandardUserDefaults)
+            {
+                // Question quantity
+                int n = (int)(ns.IntForKey(KEY_QUESTION_QUANTITY));
+                if (n != 0)
+                {
+                    _num_of_questions = n;
+                    Console.WriteLine("ChgkGame: Question quantity = " + n.ToString());
+                }
+
+                // Show tips
+                var on = ns.BoolForKey(KEY_SHOW_TIPS);
+                _show_tips = on;
+                Console.WriteLine("ChgkGame: Show tips = " + on.ToString());
+
             }
         }
     }
