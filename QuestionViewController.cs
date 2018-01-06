@@ -120,7 +120,10 @@ namespace EasyChGK
         {
             var game = Neo.ChgkGame.GetGame();
             RoundLabel.Text = game.GetRound().ToString();
-            ScoreLabel.Text = game.GetScore().ToString();
+
+            int g = game.GetGuessed();
+            int ng = game.GetNotGuessed();
+            ScoreLabel.Text = g + ":" + ng;
         }
     }
 }

@@ -16,7 +16,8 @@ namespace EasyChGK.Neo
 
         private static ChgkGame _chgkGame;
         private int _round;
-        private int _score;
+        private int _guessed;
+        private int _notguessed;
         private int _num_of_questions;
         private bool _show_tips;
 
@@ -29,6 +30,26 @@ namespace EasyChGK.Neo
             _show_tips = true;
             LoadPreferences();
             ResetGame();
+        }
+
+        public int GetGuessed()
+        {
+            return _guessed;
+        }
+
+        public void AddGuessed()
+        {
+            _guessed++;
+        }
+
+        public int GetNotGuessed()
+        {
+            return _notguessed;
+        }
+
+        public void AddNotGuessed()
+        {
+            _notguessed++;
         }
 
         public int GetRound()
@@ -68,11 +89,6 @@ namespace EasyChGK.Neo
             }
         }
 
-        public int GetScore()
-        {
-            return _score;
-        }
-
         public bool IsLastRound()
         {
             return _round == _num_of_questions;
@@ -81,7 +97,7 @@ namespace EasyChGK.Neo
         public void ResetGame()
         {
             _round = 1;
-            _score = 0;
+            _guessed = _notguessed = 0;
             if (questions != null)
             {
                 questions.Clear();
@@ -144,11 +160,6 @@ namespace EasyChGK.Neo
             }
             currentQuestionNode = currentQuestionNode.Next;
             return true;
-        }
-
-        public void AddScore()
-        {
-            _score++;
         }
 
         public static ChgkGame GetGame()
