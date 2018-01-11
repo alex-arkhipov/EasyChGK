@@ -35,9 +35,6 @@ namespace EasyChGK
             if (questionView != null)
             {
                 Console.WriteLine("MainMenuView: GoToQuestionView called 2");
-                var game = Neo.ChgkGame.GetGame();
-                game.ResetGame();
-                game.StartNewGame();
                 this.NavigationController.PushViewController(questionView, true);
             }
         }

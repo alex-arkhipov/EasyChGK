@@ -18,19 +18,11 @@ namespace EasyChGK
 
             Console.WriteLine("View Did Load of QuestionViewController called");
 
-            AnswerButton.Enabled = true;
-            PictureButton.Hidden = false;
+            ResetGame();
 
-            NextRound(true);
-            UpdateUI();
-
-            AnswerButton.TouchUpInside += (object sender, EventArgs e) => {
-                GoToAnswerView();
-            };
-
-            PictureButton.TouchUpInside += (object sender, EventArgs e) => {
-                GoToImageView();
-            };
+            AnswerButton.TouchUpInside += (object sender, EventArgs e) => GoToAnswerView();
+            PictureButton.TouchUpInside += (object sender, EventArgs e) => GoToImageView();
+            ResetButton.TouchUpInside += (object sender, EventArgs e) => ResetGame();
         }
 
         private void GoToImageView()
@@ -69,18 +61,15 @@ namespace EasyChGK
             {
                 // Last round
                 AnswerButton.Enabled = false;
-                UpdateLabels(); // Need to update scores
-
-                return;
+                ResetButton.Hidden = false;
             }
-
-            if (!isFirst) game.NextRound();
-
+            else
+            {
+                if (!isFirst) game.NextRound();
+                // Show question
+                ShowQuestion(game.GetCurrentQuestion());
+            }
             UpdateUI();
-
-            // Show question
-            ShowQuestion(game.GetCurrentQuestion());
-
         }
 
         private void ShowQuestion(String q)
@@ -90,10 +79,16 @@ namespace EasyChGK
 
         private void ResetGame()
         {
+            Console.WriteLine("QuestionView: ResetGame called");
             QuestionTextView.Text = "";
+            ResetButton.Hidden = true;
+            AnswerButton.Enabled = true;
+            PictureButton.Hidden = false;
             var game = Neo.ChgkGame.GetGame();
             game.ResetGame();
-            UpdateLabels();
+            game.StartNewGame();
+            NextRound(true);
+            UpdateUI();
         }
 
         public override void DidReceiveMemoryWarning()
@@ -113,7 +108,7 @@ namespace EasyChGK
             var game = Neo.ChgkGame.GetGame();
             var q = game.GetCurrentAll();
 
-            PictureButton.Hidden = q.IsImage() ? false : true;
+            PictureButton.Hidden = !q.IsImage();
         }
 
         private void UpdateLabels()

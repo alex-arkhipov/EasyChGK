@@ -32,6 +32,10 @@ namespace EasyChGK
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton ResetButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel RoundLabel { get; set; }
 
         [Outlet]
@@ -58,6 +62,11 @@ namespace EasyChGK
             if (QuestionTextView != null) {
                 QuestionTextView.Dispose ();
                 QuestionTextView = null;
+            }
+
+            if (ResetButton != null) {
+                ResetButton.Dispose ();
+                ResetButton = null;
             }
 
             if (RoundLabel != null) {

@@ -75,6 +75,10 @@
                                 </accessibility>
                                 <state key="normal" backgroundImage="pic70x70.png"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8645" translatesAutoresizingMaskIntoConstraints="NO" misplaced="YES">
+                                <rect key="frame" x="40" y="43" width="46" height="30"/>
+                                <state key="normal" title="Reset"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint id="4418" firstItem="395" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="11"/>
@@ -91,6 +95,8 @@
                             <constraint id="6851" firstItem="5997" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23"/>
                             <constraint id="6852" firstItem="5997" firstAttribute="bottom" secondItem="394" secondAttribute="centerY" constant="17"/>
                             <constraint id="6853" firstItem="395" firstAttribute="top" secondItem="394" secondAttribute="bottom" constant="4"/>
+                            <constraint id="8646" firstItem="8645" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="24"/>
+                            <constraint id="8647" firstItem="8645" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23"/>
                         </constraints>
                     </view>
                     <connections>
@@ -100,6 +106,7 @@
                         <outlet property="ScoreLabel" destination="402" id="name-outlet-402"/>
                         <outlet property="QuestionLable" destination="394" id="name-outlet-394"/>
                         <outlet property="PictureButton" destination="5997" id="name-outlet-5997"/>
+                        <outlet property="ResetButton" destination="8645" id="name-outlet-8645"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

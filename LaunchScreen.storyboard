@@ -26,5 +26,6 @@
     </scenes>
     <resources>
         <image name="512x512bb.png" width="512" height="512"/>
+        <image name="pic70x70.png" width="70" height="70"/>
     </resources>
 </document>
