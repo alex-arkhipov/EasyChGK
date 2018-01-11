@@ -26,6 +26,7 @@ namespace EasyChGK.Neo
             _image = "";
             parseImage();
             parseTip();
+            removeLFCR();
         }
 
         private void parseTip()
@@ -79,6 +80,15 @@ namespace EasyChGK.Neo
                 }
                 removeImage();
             }
+        }
+
+        // Remone Line Ending and Carriage Return
+        private void removeLFCR()
+        {
+            // Remove all LF symbols
+            _question = _question.Replace(Environment.NewLine, " ");
+            // Add new line where necessary
+            _question = _question.Replace("    ", Environment.NewLine + "   ");
         }
 
         public bool IsImage()
