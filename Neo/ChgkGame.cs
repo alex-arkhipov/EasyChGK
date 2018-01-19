@@ -7,6 +7,8 @@ namespace EasyChGK.Neo
 {
     public class ChgkGame
     {
+        const bool IS_DEBUG = true;
+
         const int DEFAULT_NUM_OF_QUESTIONS = 6;
         const int MAX_NUM_OF_QUESTIONS = 100;
 
@@ -30,6 +32,11 @@ namespace EasyChGK.Neo
             _show_tips = true;
             LoadPreferences();
             ResetGame();
+        }
+
+        public bool IsDebug()
+        {
+            return IS_DEBUG;
         }
 
         public int GetGuessed()
@@ -76,15 +83,15 @@ namespace EasyChGK.Neo
         {
             if (n < 1)
             {
-                Console.WriteLine("Cannot set number of questions less than 1 (" + n + ")");
+                Console.WriteLine("ERROE: ChgkGame: Cannot set number of questions less than 1 (" + n + ")");
             } else if (n > MAX_NUM_OF_QUESTIONS)
             {
-                Console.WriteLine("Cannot set number of questions to very big value (" + n + ")");
-                Console.WriteLine("Setting to maximum value (" + MAX_NUM_OF_QUESTIONS + ")");
+                Console.WriteLine("ERROR: ChgkGame: Cannot set number of questions to very big value (" + n + ")");
+                Console.WriteLine("ChgkGame: Setting to maximum value (" + MAX_NUM_OF_QUESTIONS + ")");
                 _num_of_questions = MAX_NUM_OF_QUESTIONS;
             } else
             {
-                Console.WriteLine("Setting number of questions to '" + n + "'");
+                Console.WriteLine("ChgkGame: Setting number of questions to '" + n + "'");
                 _num_of_questions = n;
             }
         }
@@ -104,12 +111,22 @@ namespace EasyChGK.Neo
             }
             questions = new LinkedList<ChgkQuestion>();
             currentQuestionNode = null;
+            Console.WriteLine("ChgkGame: Game is reset");
         }
 
         public void StartNewGame()
         {
             // Download questions
-            var text = ChgkExternal.GetQuestionsXML(_num_of_questions);
+            String text;
+
+            if (!IsDebug())
+            {
+                text = ChgkExternal.GetQuestionsXML(_num_of_questions);
+            }
+            else
+            {
+                text = ChgkExternal.GetQuestionsXMLTest();   
+            }
 
             // Parse xml
             ParseQuestionsXML(text);
@@ -120,11 +137,11 @@ namespace EasyChGK.Neo
             }
             else 
             {
-                Console.WriteLine("There is no questions in XML: " + text);   
+                Console.WriteLine("ChgkGame: here is no questions in XML: " + text);   
             }
-            if (questions.Count < _num_of_questions)
+            if (qnum < _num_of_questions)
             {
-                Console.WriteLine("Warning: num_of_q != real num (num_of_q = " + _num_of_questions + " | real = " + qnum);
+                Console.WriteLine("WARNING: ChgkGame: num_of_q != real num (num_of_q = " + _num_of_questions + " | real = " + qnum);
             }
         }
 
@@ -155,7 +172,7 @@ namespace EasyChGK.Neo
             _round++;
             if (currentQuestionNode == null)
             {
-                Console.WriteLine("Something wrong happen - null pointer 'currentQuestionNode'");
+                Console.WriteLine("ChgkGame: Something wrong happen - null pointer 'currentQuestionNode'");
                 return false;
             }
             currentQuestionNode = currentQuestionNode.Next;
@@ -178,7 +195,7 @@ namespace EasyChGK.Neo
             var nodelist = xmldoc.SelectNodes("/search/question");
             if (nodelist.Count == 0)
             {
-                Console.WriteLine("No questions in xml. Exiting...");
+                Console.WriteLine("WARNING: ChgkGame: No questions in xml. Exiting...");
                 return;
             }
             var i = 1;
@@ -191,7 +208,10 @@ namespace EasyChGK.Neo
                 var question = new ChgkQuestion(q, a, c);
                 questions.AddLast(question);
 
-                Console.WriteLine(i.ToString()+") Question: " + q);
+                if (IsDebug())
+                {
+                    Console.WriteLine("ChgkGame:" + i.ToString() + ") Question: " + q);    
+                }
                 i++;
             }
         }

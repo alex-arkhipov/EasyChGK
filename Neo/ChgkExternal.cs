@@ -1,7 +1,9 @@
 ﻿// Class to work with remote ChGK DB
 
 using System;
+using System.Diagnostics.Contracts;
 using Foundation;
+using System.IO;
 
 namespace EasyChGK.Neo
 {
@@ -32,6 +34,15 @@ namespace EasyChGK.Neo
                s = data.ToString();
             }
             return s;
+        }
+
+        public static String GetQuestionsXMLTest()
+        {
+            Contract.Ensures(Contract.Result<string>() != null);
+            //Console.WriteLine(String.Join(Environment.NewLine, Directory.GetFiles(Directory.GetCurrentDirectory())));
+            
+            string text = System.IO.File.ReadAllText(@"test_questions.xml");
+            return text;
         }
 
         // Get image URL

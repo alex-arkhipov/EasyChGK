@@ -61,7 +61,7 @@ namespace EasyChGK.Neo
             {
                 Console.WriteLine("Picture found:" + _question);
 
-                string pattern = @"\(pic:\s*(\d+\.jpg)\)";
+                string pattern = @"\(pic:\s*(\d+\.(jpg|gif))\)";
                 Regex regex = new Regex(pattern);
 
                 // Получаем совпадения в экземпляре класса Match
@@ -103,7 +103,7 @@ namespace EasyChGK.Neo
 
         private void removeImage()
         {
-            string pattern = @"(\(pic:\s*(\d+)\.jpg\)\s*)";
+            string pattern = @"(\(pic:\s*(\d+)\.(jpg|gif)\)\s*)";
             _question = Regex.Replace(_question, pattern, "");
         }
 
