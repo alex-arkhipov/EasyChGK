@@ -21,6 +21,9 @@ namespace EasyChGK
             base.ViewDidLoad();
             //this.NavigationController.SetNavigationBarHidden(true, true);
 
+            var title = NSBundle.MainBundle.LocalizedString("Answer view title", "");
+            Title = title;
+
             Console.WriteLine("AnswerView: ViewDidLoad called");
 
             _isButtonPressed = false;

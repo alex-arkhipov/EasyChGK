@@ -22,6 +22,10 @@ namespace EasyChGK
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton StartNewGameButton { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel VersionLabel { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (SettingsButton != null) {
@@ -32,6 +36,11 @@ namespace EasyChGK
             if (StartNewGameButton != null) {
                 StartNewGameButton.Dispose ();
                 StartNewGameButton = null;
+            }
+
+            if (VersionLabel != null) {
+                VersionLabel.Dispose ();
+                VersionLabel = null;
             }
         }
     }

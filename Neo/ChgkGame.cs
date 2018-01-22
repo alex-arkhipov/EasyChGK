@@ -36,7 +36,11 @@ namespace EasyChGK.Neo
 
         public bool IsDebug()
         {
-            return IS_DEBUG;
+#if __NEOTEST__
+            return true;
+#else
+            return false;
+#endif
         }
 
         public int GetGuessed()

@@ -16,6 +16,9 @@ namespace EasyChGK
         {
             base.ViewDidLoad();
 
+            var title = NSBundle.MainBundle.LocalizedString("Question view title", "");
+            Title = title;
+
             Console.WriteLine("View Did Load of QuestionViewController called");
 
             ResetGame();

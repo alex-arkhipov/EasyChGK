@@ -1,6 +1,7 @@
 ﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
 
 using Foundation;
 using UIKit;
@@ -24,6 +25,13 @@ namespace EasyChGK
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
+
+            // TODO: remove this later
+            Console.WriteLine("Version = " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+            var buildVersionNo = NSBundle.MainBundle.InfoDictionary[new NSString("CFBundleShortVersionString")].ToString();
+            Console.WriteLine("Version2 = " + buildVersionNo);
+
             AppCenter.Start("50989672-bbad-4d3f-8cf9-12f8431732d8",
                             typeof(Analytics), typeof(Crashes));
             

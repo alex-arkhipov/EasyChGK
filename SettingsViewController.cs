@@ -16,6 +16,9 @@ namespace EasyChGK
         {
             base.ViewDidLoad();
 
+            var title = NSBundle.MainBundle.LocalizedString("Settings view title", "");
+            Title = title;
+
             var game = Neo.ChgkGame.GetGame();
 
             int n = game.GetNumOfQuestions();

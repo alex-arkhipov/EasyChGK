@@ -17,6 +17,10 @@ namespace EasyChGK
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
+            var versionString = NSBundle.MainBundle.LocalizedString("Version", "");
+            var buildVersionNo = NSBundle.MainBundle.InfoDictionary[new NSString("CFBundleVersion")].ToString();
+            VersionLabel.Text = versionString + buildVersionNo;
+
             StartNewGameButton.TouchUpInside += (object sender, EventArgs e) => {
                 Console.WriteLine("Start New Game pushed");
                 GoToQuestionView();
